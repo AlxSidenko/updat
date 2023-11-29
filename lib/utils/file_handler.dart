@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:archive/archive_io.dart';
 import 'package:path_provider/path_provider.dart';
@@ -63,9 +62,7 @@ Future<void> openInstaller(File file, String appName) async {
     }
     if (Platform.isWindows && file.absolute.path.endsWith('msi')) {
       var shell = Shell();
-      Isolate.spawn((message) {
-        shell.run('msiexec /i ${file.absolute.path.replaceAll('/', r'\')} /qb');
-      }, null);
+      shell.run('msiexec /i ${file.absolute.path.replaceAll('/', r'\')} /qb');
     } else {
       await openUri(Uri(path: file.absolute.path, scheme: 'file'));
     }
