@@ -269,7 +269,9 @@ class _UpdatWidgetState extends State<UpdatWidget> {
     // Open the file.
     try {
       await openInstaller(installerFile!, widget.appName);
-      if (widget.closeOnInstall) exit(0);
+      if (widget.closeOnInstall) {
+        Future.delayed(const Duration(seconds: 3)).then((value) => exit(0));
+      }
     } catch (e) {
       setState(() {
         status = UpdatStatus.error;
