@@ -4,6 +4,7 @@ import 'package:archive/archive_io.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'package:http/http.dart' as http;
+import 'package:process_run/shell.dart';
 
 import 'package:updat/utils/global_options.dart';
 import 'package:updat/utils/open_link.dart';
@@ -59,7 +60,12 @@ Future<void> openInstaller(File file, String appName) async {
           }).path
       );
     }
-    await openUri(Uri(path: file.absolute.path, scheme: 'file'));
+    if (Platform.isWindows && file.absolute.path.endsWith('msi')) {
+      var shell = Shell();
+      shell.run('msiexec /i ${file.absolute.path} /qb');
+    } else {
+      await openUri(Uri(path: file.absolute.path, scheme: 'file'));
+    }
   } else {
     throw Exception(
       'Installer does not exists, you have to download it first',

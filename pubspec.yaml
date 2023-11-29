@@ -19,6 +19,7 @@ dependencies:
   window_manager: ^0.3.0
   archive: ^3.3.7
   universal_io: ^2.2.2
+  process_run: ^0.13.3
 
 dev_dependencies:
   flutter_test:
