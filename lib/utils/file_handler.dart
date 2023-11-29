@@ -62,7 +62,7 @@ Future<void> openInstaller(File file, String appName) async {
     }
     if (Platform.isWindows && file.absolute.path.endsWith('msi')) {
       var shell = Shell();
-      shell.run('msiexec /i ${file.absolute.path.replaceAll('/', r'\')} /qb');
+      shell.run('msiexec /i ${file.absolute.path.replaceAll('/', r'\')} /qn');
     } else {
       await openUri(Uri(path: file.absolute.path, scheme: 'file'));
     }

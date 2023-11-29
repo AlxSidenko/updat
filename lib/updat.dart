@@ -270,7 +270,7 @@ class _UpdatWidgetState extends State<UpdatWidget> {
     try {
       await openInstaller(installerFile!, widget.appName);
       if (widget.closeOnInstall) {
-        Future.delayed(const Duration(milliseconds: 500)).then((value) => exit(0));
+        Future.delayed(const Duration(milliseconds: 200)).then((value) => exit(0));
       }
     } catch (e) {
       setState(() {
